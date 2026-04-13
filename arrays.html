@@ -9,6 +9,196 @@
 
 <body>
 
-</body>
+    <body style="background-color: burlywood;">
+        <div style="font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; line-height: 1.6;">
+            <h1>📚 Learn JavaScript Arrays Step by Step</h1>
+            <p>Arrays are lists that store many values in one variable. This page helps you practice array basics and
+                common array methods.</p>
+
+            <h2>1️⃣ Create and Access Arrays</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let colors = ["red", "green", "blue"];
+let firstColor = colors[0];      // "red"
+let secondColor = colors[1];     // "green"
+let lastColor = colors[colors.length - 1];
+        </pre>
+            <button onclick="demo1()">Run Demo 1</button>
+            <p id="result1"></p>
+
+            <h2>2️⃣ Add and Remove Items</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let numbers = [1, 2, 3];
+numbers.push(4);     // add to end
+numbers.unshift(0);  // add to start
+numbers.pop();       // remove last item
+numbers.shift();     // remove first item
+        </pre>
+            <button onclick="demo2()">Run Demo 2</button>
+            <p id="result2"></p>
+
+            <h2>3️⃣ Array Length and Index</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let items = ["apple", "banana", "cherry"];
+let count = items.length;          // 3
+let index = items.indexOf("banana");  // 1
+let hasApple = items.includes("apple"); // true
+        </pre>
+            <button onclick="demo3()">Run Demo 3</button>
+            <p id="result3"></p>
+
+            <h2>4️⃣ Loop Through an Array</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let letters = ["a", "b", "c"];
+for (let i = 0; i < letters.length; i++) {
+    console.log(letters[i]);
+}
+        </pre>
+            <button onclick="demo4()">Run Demo 4</button>
+            <p id="result4"></p>
+
+            <h2>5️⃣ Array Methods: map, filter, and find</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let scores = [10, 20, 30, 40];
+let doubled = scores.map(n => n * 2);
+let highScores = scores.filter(n => n >= 30);
+let firstHigh = scores.find(n => n >= 30);
+        </pre>
+            <button onclick="demo5()">Run Demo 5</button>
+            <p id="result5"></p>
+
+            <h2>6️⃣ Modify Arrays with splice</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let days = ["Mon", "Tue", "Thu", "Fri"];
+days.splice(2, 0, "Wed");      // insert at index 2
+days.splice(4, 1);              // remove "Fri"
+        </pre>
+            <button onclick="demo6()">Run Demo 6</button>
+            <p id="result6"></p>
+
+            <h2>7️⃣ Combine Arrays</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let a = [1, 2];
+let b = [3, 4];
+let combined = a.concat(b);
+let alsoCombined = [...a, ...b];
+        </pre>
+            <button onclick="demo7()">Run Demo 7</button>
+            <p id="result7"></p>
+
+            <h2>8️⃣ Nested Arrays</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let matrix = [
+    [1, 2],
+    [3, 4]
+];
+let value = matrix[1][0];  // 3
+        </pre>
+            <button onclick="demo8()">Run Demo 8</button>
+            <p id="result8"></p>
+
+            <h2>9️⃣ Practice Challenge</h2>
+            <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+// Create a function that returns even numbers from an array
+function getEvenNumbers(numbers) {
+    return numbers.filter(n => n % 2 === 0);
+}
+        </pre>
+            <button onclick="demo9()">Run Demo 9</button>
+            <p id="result9"></p>
+
+            <hr style="margin: 30px 0;">
+            <h2>💡 Key Array Concepts</h2>
+            <ul>
+                <li>An array stores ordered values inside square brackets <code>[]</code></li>
+                <li>Use an index to get items: <code>array[0]</code> is the first item</li>
+                <li><code>push</code>/<code>pop</code> change the end; <code>shift</code>/<code>unshift</code> change
+                    the start</li>
+                <li><code>map</code>, <code>filter</code>, and <code>find</code> are powerful ways to transform arrays
+                </li>
+                <li><code>splice</code> can add or remove items at any position</li>
+            </ul>
+        </div>
+
+        <script>
+            function demo1() {
+                let colors = ["red", "green", "blue"];
+                let firstColor = colors[0];
+                let secondColor = colors[1];
+                let lastColor = colors[colors.length - 1];
+                document.getElementById("result1").innerHTML =
+                    `Colors: ${colors.join(", ")}<br>First: ${firstColor}<br>Second: ${secondColor}<br>Last: ${lastColor}`;
+            }
+
+            function demo2() {
+                let numbers = [1, 2, 3];
+                numbers.push(4);
+                numbers.unshift(0);
+                numbers.pop();
+                numbers.shift();
+                document.getElementById("result2").innerHTML =
+                    `Result: ${numbers.join(", ")}`;
+            }
+
+            function demo3() {
+                let items = ["apple", "banana", "cherry"];
+                let count = items.length;
+                let index = items.indexOf("banana");
+                let hasApple = items.includes("apple");
+                document.getElementById("result3").innerHTML =
+                    `Items: ${items.join(", ")}<br>Length: ${count}<br>Index of banana: ${index}<br>Has apple? ${hasApple}`;
+            }
+
+            function demo4() {
+                let letters = ["a", "b", "c"];
+                let output = [];
+                for (let i = 0; i < letters.length; i++) {
+                    output.push(`Index ${i}: ${letters[i]}`);
+                }
+                document.getElementById("result4").innerHTML = output.join("<br>");
+            }
+
+            function demo5() {
+                let scores = [10, 20, 30, 40];
+                let doubled = scores.map(n => n * 2);
+                let highScores = scores.filter(n => n >= 30);
+                let firstHigh = scores.find(n => n >= 30);
+                document.getElementById("result5").innerHTML =
+                    `Original: ${scores.join(", ")}<br>Doubled: ${doubled.join(", ")}<br>High scores: ${highScores.join(", ")}<br>First high score: ${firstHigh}`;
+            }
+
+            function demo6() {
+                let days = ["Mon", "Tue", "Thu", "Fri"];
+                days.splice(2, 0, "Wed");
+                days.splice(4, 1);
+                document.getElementById("result6").innerHTML =
+                    `Days: ${days.join(", ")}`;
+            }
+
+            function demo7() {
+                let a = [1, 2];
+                let b = [3, 4];
+                let combined = a.concat(b);
+                let alsoCombined = [...a, ...b];
+                document.getElementById("result7").innerHTML =
+                    `concat: ${combined.join(", ")}<br>spread: ${alsoCombined.join(", ")}`;
+            }
+
+            function demo8() {
+                let matrix = [[1, 2], [3, 4]];
+                let value = matrix[1][0];
+                document.getElementById("result8").innerHTML =
+                    `Matrix: [${matrix[0].join(", ")}], [${matrix[1].join(", ")}]<br>Value at [1][0]: ${value}`;
+            }
+
+            function demo9() {
+                function getEvenNumbers(numbers) {
+                    return numbers.filter(n => n % 2 === 0);
+                }
+                let result = getEvenNumbers([1, 2, 3, 4, 5, 6]);
+                document.getElementById("result9").innerHTML =
+                    `Even numbers: ${result.join(", ")}`;
+            }
+        </script>
+    </body>
 
 </html>
