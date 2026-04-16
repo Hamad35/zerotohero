@@ -239,8 +239,8 @@ let totalScore = sumArray(scores);  // 348
             function greetPerson(name) {
                 return "Hello, " + name + "!";
             }
-            let message = greetPerson("Hamad");
-            document.getElementById("result6").innerHTML = message;
+            let message = greetPerson('Hamad');
+            document.getElementById('result6').innerHTML = message
         }
 
         // Demo 7: Multiple Parameters
@@ -249,21 +249,22 @@ let totalScore = sumArray(scores);  // 348
                 return num1 + num2;
             }
             let result = add(5, 3);
-            document.getElementById("result7").innerHTML =
-                `5 + 3 = ${result}`;
+            document.getElementById('result7').innerHTML = `5 + 3 = ${result}`;
         }
-
         // Demo 8: Return Value
         function demo8() {
+
             function multiply(a, b) {
-                let result = a * b;
+                let result = (a * b);
                 return result;
             }
             let answer = multiply(4, 5);
-            document.getElementById("result8").innerHTML =
-                `4 × 5 = ${answer}`;
+            document.getElementById("result8").innerHTML = `4 * 5 = ${answer}`;
         }
 
+
+
+        2
         // Demo 9: Calculate Discount
         function demo9() {
             function calculateDiscount(price, discountPercent) {
@@ -276,7 +277,7 @@ let totalScore = sumArray(scores);  // 348
             document.getElementById("result9").innerHTML =
                 `Original Price: $${originalPrice}<br>Discount: 20%<br>Final Price: $${finalPrice}`;
         }
-
+ 
         // Demo 10: Default Parameters
         function demo10() {
             function introduce(name, country = "Unknown") {
