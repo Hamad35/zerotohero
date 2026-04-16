@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous JavaScript</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; line-height: 1.6;">
+
+        <!-- SECTION 1: SYNCHRONOUS VS ASYNCHRONOUS -->
+        <h1>📚 Learn Asynchronous JavaScript Step by Step</h1>
+
+        <h2>1️⃣ SYNCHRONOUS VS ASYNCHRONOUS - Understanding the Difference</h2>
+        <p><strong>Synchronous:</strong> Code runs line by line, one after another<br>
+        <strong>Asynchronous:</strong> Code can run in parallel, doesn't block execution</p>
+
+        <h3>Step 1.1: Synchronous Example</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+console.log("Start");
+console.log("Middle");
+console.log("End");
+// Output: Start, Middle, End (in order)
+        </pre>
+        <button onclick="demo1()">Run Demo 1</button>
+        <p id="result1"></p>
+
+        <h3>Step 1.2: Asynchronous Example with setTimeout</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+console.log("Start");
+setTimeout(() => {
+    console.log("Delayed message");
+}, 2000);
+console.log("End");
+// Output: Start, End, Delayed message (after 2 seconds)
+        </pre>
+        <button onclick="demo2()">Run Demo 2</button>
+        <p id="result2"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 2: CALLBACKS -->
+        <h2>2️⃣ CALLBACKS - Functions as Arguments</h2>
+        <p><strong>What is a callback?</strong> A function passed as an argument to another function</p>
+
+        <h3>Step 2.1: Basic Callback</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function greet(name, callback) {
+    console.log("Hello " + name);
+    callback();
+}
+
+function sayGoodbye() {
+    console.log("Goodbye!");
+}
+
+greet("Hamad", sayGoodbye);
+        </pre>
+        <button onclick="demo3()">Run Demo 3</button>
+        <p id="result3"></p>
+
+        <h3>Step 2.2: Callback with Parameters</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function calculate(a, b, operation, callback) {
+    let result = operation(a, b);
+    callback(result);
+}
+
+function displayResult(result) {
+    console.log("Result: " + result);
+}
+
+calculate(5, 3, (x, y) => x + y, displayResult);
+        </pre>
+        <button onclick="demo4()">Run Demo 4</button>
+        <p id="result4"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 3: PROMISES -->
+        <h2>3️⃣ PROMISES - Better Way to Handle Async Operations</h2>
+        <p><strong>What is a Promise?</strong> An object representing the eventual completion of an async operation</p>
+
+        <h3>Step 3.1: Creating a Promise</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        let success = true;
+        if (success) {
+            resolve("Operation successful!");
+        } else {
+            reject("Operation failed!");
+        }
+    }, 2000);
+});
+        </pre>
+        <button onclick="demo5()">Run Demo 5</button>
+        <p id="result5"></p>
+
+        <h3>Step 3.2: Using Promises with then/catch</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function fetchData() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("Data received!");
+        }, 1500);
+    });
+}
+
+fetchData()
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+        </pre>
+        <button onclick="demo6()">Run Demo 6</button>
+        <p id="result6"></p>
+
+        <h3>Step 3.3: Promise Chaining</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function getUser() {
+    return Promise.resolve({id: 1, name: "Hamad"});
+}
+
+function getPosts(user) {
+    return Promise.resolve([
+        {id: 1, title: "Post 1", userId: user.id},
+        {id: 2, title: "Post 2", userId: user.id}
+    ]);
+}
+
+getUser()
+    .then(user => getPosts(user))
+    .then(posts => console.log(posts))
+    .catch(error => console.log(error));
+        </pre>
+        <button onclick="demo7()">Run Demo 7</button>
+        <p id="result7"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 4: ASYNC/AWAIT -->
+        <h2>4️⃣ ASYNC/AWAIT - Cleaner Promise Syntax</h2>
+        <p><strong>What is async/await?</strong> Modern syntax for working with promises</p>
+
+        <h3>Step 4.1: Basic async/await</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function getData() {
+    try {
+        let result = await fetchData();
+        console.log(result);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function fetchData() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve("Data loaded!"), 1000);
+    });
+}
+        </pre>
+        <button onclick="demo8()">Run Demo 8</button>
+        <p id="result8"></p>
+
+        <h3>Step 4.2: Multiple await calls</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function loadUserData() {
+    try {
+        let user = await getUser();
+        let posts = await getPosts(user.id);
+        let comments = await getComments(posts[0].id);
+
+        console.log("User:", user.name);
+        console.log("Posts:", posts.length);
+        console.log("Comments:", comments.length);
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+        </pre>
+        <button onclick="demo9()">Run Demo 9</button>
+        <p id="result9"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 5: FETCH API -->
+        <h2>5️⃣ FETCH API - Making HTTP Requests</h2>
+        <p><strong>What is Fetch?</strong> Modern way to make network requests in JavaScript</p>
+
+        <h3>Step 5.1: Basic GET Request</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+fetch('https://jsonplaceholder.typicode.com/users/1')
+    .then(response => response.json())
+    .then(user => console.log(user))
+    .catch(error => console.log('Error:', error));
+        </pre>
+        <button onclick="demo10()">Run Demo 10</button>
+        <p id="result10"></p>
+
+        <h3>Step 5.2: Fetch with async/await</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function getUser() {
+    try {
+        let response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+        let user = await response.json();
+        console.log('User:', user.name);
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}
+        </pre>
+        <button onclick="demo11()">Run Demo 11</button>
+        <p id="result11"></p>
+
+        <h3>Step 5.3: POST Request</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function createPost() {
+    try {
+        let response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: 'My New Post',
+                body: 'This is the content',
+                userId: 1
+            })
+        });
+        let newPost = await response.json();
+        console.log('Created post:', newPost);
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}
+        </pre>
+        <button onclick="demo12()">Run Demo 12</button>
+        <p id="result12"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 6: PRACTICAL EXAMPLE -->
+        <h2>6️⃣ PRACTICAL EXAMPLE - Weather App</h2>
+
+        <div id="weatherApp" style="border: 1px solid #ccc; padding: 20px; margin: 20px 0;">
+            <h3>Weather App Demo</h3>
+            <input type="text" id="cityInput" placeholder="Enter city name" style="padding: 5px; margin-right: 10px;">
+            <button onclick="getWeather()">Get Weather</button>
+            <div id="weatherResult" style="margin-top: 10px; padding: 10px; background-color: #f9f9f9;"></div>
+        </div>
+
+        <button onclick="demo13()">Initialize Weather App</button>
+        <p id="result13"></p>
+
+        <hr style="margin: 30px 0;">
+        <h2>💡 Key Takeaways</h2>
+        <ul>
+            <li><strong>Synchronous:</strong> Code runs in sequence, blocks execution</li>
+            <li><strong>Asynchronous:</strong> Code runs in parallel, doesn't block</li>
+            <li><strong>Callbacks:</strong> Functions passed as arguments to handle async results</li>
+            <li><strong>Promises:</strong> Objects representing future values (pending, fulfilled, rejected)</li>
+            <li><strong>async/await:</strong> Cleaner syntax for working with promises</li>
+            <li><strong>Fetch:</strong> Modern API for making HTTP requests</li>
+        </ul>
+
+    </div>
+
+    <script>
+        // Demo 1: Synchronous
+        function demo1() {
+            console.log("Start");
+            console.log("Middle");
+            console.log("End");
+            document.getElementById("result1").innerHTML = "Check console: Start → Middle → End (synchronous)";
+        }
+
+        // Demo 2: Asynchronous with setTimeout
+        function demo2() {
+            console.log("Start");
+            document.getElementById("result2").innerHTML = "Started... check console for results";
+
+            setTimeout(() => {
+                console.log("Delayed message (after 2 seconds)");
+                document.getElementById("result2").innerHTML = "Check console: Start → End → Delayed message";
+            }, 2000);
+
+            console.log("End");
+        }
+
+        // Demo 3: Basic Callback
+        function demo3() {
+            function greet(name, callback) {
+                console.log("Hello " + name);
+                callback();
+            }
+
+            function sayGoodbye() {
+                console.log("Goodbye!");
+            }
+
+            greet("Hamad", sayGoodbye);
+            document.getElementById("result3").innerHTML = "Check console for callback execution";
+        }
+
+        // Demo 4: Callback with Parameters
+        function demo4() {
+            function calculate(a, b, operation, callback) {
+                let result = operation(a, b);
+                callback(result);
+            }
+
+            function displayResult(result) {
+                console.log("Result: " + result);
+            }
+
+            calculate(5, 3, (x, y) => x + y, displayResult);
+            document.getElementById("result4").innerHTML = "Check console: Result should be 8";
+        }
+
+        // Demo 5: Creating a Promise
+        function demo5() {
+            document.getElementById("result5").innerHTML = "Creating promise...";
+
+            let promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let success = Math.random() > 0.5;
+                    if (success) {
+                        resolve("Operation successful!");
+                    } else {
+                        reject("Operation failed!");
+                    }
+                }, 2000);
+            });
+
+            promise
+                .then(result => {
+                    document.getElementById("result5").innerHTML = "Promise resolved: " + result;
+                })
+                .catch(error => {
+                    document.getElementById("result5").innerHTML = "Promise rejected: " + error;
+                });
+        }
+
+        // Demo 6: Promise with then/catch
+        function demo6() {
+            document.getElementById("result6").innerHTML = "Fetching data...";
+
+            function fetchData() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve("Data received!");
+                    }, 1500);
+                });
+            }
+
+            fetchData()
+                .then(result => {
+                    document.getElementById("result6").innerHTML = "Success: " + result;
+                })
+                .catch(error => {
+                    document.getElementById("result6").innerHTML = "Error: " + error;
+                });
+        }
+
+        // Demo 7: Promise Chaining
+        function demo7() {
+            document.getElementById("result7").innerHTML = "Loading user data...";
+
+            function getUser() {
+                return Promise.resolve({id: 1, name: "Hamad"});
+            }
+
+            function getPosts(user) {
+                return Promise.resolve([
+                    {id: 1, title: "Post 1", userId: user.id},
+                    {id: 2, title: "Post 2", userId: user.id}
+                ]);
+            }
+
+            getUser()
+                .then(user => {
+                    document.getElementById("result7").innerHTML = "Got user: " + user.name;
+                    return getPosts(user);
+                })
+                .then(posts => {
+                    document.getElementById("result7").innerHTML += "<br>Got " + posts.length + " posts";
+                })
+                .catch(error => {
+                    document.getElementById("result7").innerHTML = "Error: " + error;
+                });
+        }
+
+        // Demo 8: Basic async/await
+        async function demo8() {
+            document.getElementById("result8").innerHTML = "Loading data with async/await...";
+
+            try {
+                let result = await fetchData();
+                document.getElementById("result8").innerHTML = "Success: " + result;
+            } catch (error) {
+                document.getElementById("result8").innerHTML = "Error: " + error;
+            }
+
+            function fetchData() {
+                return new Promise(resolve => {
+                    setTimeout(() => resolve("Data loaded with async/await!"), 1000);
+                });
+            }
+        }
+
+        // Demo 9: Multiple await calls
+        async function demo9() {
+            document.getElementById("result9").innerHTML = "Loading multiple data...";
+
+            try {
+                let user = await getUser();
+                let posts = await getPosts(user.id);
+                let comments = await getComments(posts[0].id);
+
+                document.getElementById("result9").innerHTML =
+                    `User: ${user.name}<br>Posts: ${posts.length}<br>Comments: ${comments.length}`;
+            } catch (error) {
+                document.getElementById("result9").innerHTML = "Error: " + error;
+            }
+
+            function getUser() {
+                return Promise.resolve({id: 1, name: "Hamad"});
+            }
+
+            function getPosts(userId) {
+                return Promise.resolve([
+                    {id: 1, title: "Post 1", userId: userId},
+                    {id: 2, title: "Post 2", userId: userId}
+                ]);
+            }
+
+            function getComments(postId) {
+                return Promise.resolve([
+                    {id: 1, text: "Comment 1", postId: postId},
+                    {id: 2, text: "Comment 2", postId: postId},
+                    {id: 3, text: "Comment 3", postId: postId}
+                ]);
+            }
+        }
+
+        // Demo 10: Basic GET Request
+        function demo10() {
+            document.getElementById("result10").innerHTML = "Fetching user data...";
+
+            fetch('https://jsonplaceholder.typicode.com/users/1')
+                .then(response => response.json())
+                .then(user => {
+                    document.getElementById("result10").innerHTML =
+                        `User: ${user.name}<br>Email: ${user.email}<br>City: ${user.address.city}`;
+                })
+                .catch(error => {
+                    document.getElementById("result10").innerHTML = "Error: " + error.message;
+                });
+        }
+
+        // Demo 11: Fetch with async/await
+        async function demo11() {
+            document.getElementById("result11").innerHTML = "Fetching with async/await...";
+
+            try {
+                let response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+                let user = await response.json();
+                document.getElementById("result11").innerHTML = `User: ${user.name} (${user.email})`;
+            } catch (error) {
+                document.getElementById("result11").innerHTML = "Error: " + error.message;
+            }
+        }
+
+        // Demo 12: POST Request
+        async function demo12() {
+            document.getElementById("result12").innerHTML = "Creating new post...";
+
+            try {
+                let response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: 'My New Post',
+                        body: 'This is the content of my post',
+                        userId: 1
+                    })
+                });
+                let newPost = await response.json();
+                document.getElementById("result12").innerHTML =
+                    `Post created!<br>Title: ${newPost.title}<br>ID: ${newPost.id}`;
+            } catch (error) {
+                document.getElementById("result12").innerHTML = "Error: " + error.message;
+            }
+        }
+
+        // Demo 13: Weather App
+        function demo13() {
+            document.getElementById("result13").innerHTML = "Weather app initialized! Enter a city name and click 'Get Weather'.";
+        }
+
+        async function getWeather() {
+            let city = document.getElementById("cityInput").value;
+            let resultDiv = document.getElementById("weatherResult");
+
+            if (!city) {
+                resultDiv.innerHTML = "Please enter a city name!";
+                return;
+            }
+
+            resultDiv.innerHTML = "Loading weather data...";
+
+            try {
+                // Using a mock weather API since we can't use real APIs in this demo
+                let weatherData = await mockWeatherAPI(city);
+                resultDiv.innerHTML = `
+                    <h4>Weather for ${city}</h4>
+                    <p>Temperature: ${weatherData.temperature}°C</p>
+                    <p>Condition: ${weatherData.condition}</p>
+                    <p>Humidity: ${weatherData.humidity}%</p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = "Error fetching weather: " + error.message;
+            }
+        }
+
+        function mockWeatherAPI(city) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        temperature: Math.floor(Math.random() * 30) + 10,
+                        condition: ["Sunny", "Cloudy", "Rainy", "Windy"][Math.floor(Math.random() * 4)],
+                        humidity: Math.floor(Math.random() * 40) + 40
+                    });
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>

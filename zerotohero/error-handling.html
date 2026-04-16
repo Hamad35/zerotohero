@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; line-height: 1.6;">
+
+        <!-- SECTION 1: TRY/CATCH -->
+        <h1>📚 Learn Error Handling Step by Step</h1>
+
+        <h2>1️⃣ TRY/CATCH - Basic Error Handling</h2>
+        <p><strong>What is try/catch?</strong> A way to handle errors gracefully instead of crashing the program</p>
+
+        <h3>Step 1.1: Basic Try/Catch</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+try {
+    // Code that might throw an error
+    let result = riskyOperation();
+    console.log("Success:", result);
+} catch (error) {
+    // Handle the error
+    console.log("Error occurred:", error.message);
+} finally {
+    // Always runs
+    console.log("This always executes");
+}
+        </pre>
+        <button onclick="demo1()">Run Demo 1</button>
+        <p id="result1"></p>
+
+        <h3>Step 1.2: Different Types of Errors</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+// ReferenceError: variable doesn't exist
+try {
+    console.log(undefinedVariable);
+} catch (error) {
+    console.log("ReferenceError:", error.message);
+}
+
+// TypeError: wrong type of operation
+try {
+    null.toString();
+} catch (error) {
+    console.log("TypeError:", error.message);
+}
+        </pre>
+        <button onclick="demo2()">Run Demo 2</button>
+        <p id="result2"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 2: THROWING ERRORS -->
+        <h2>2️⃣ THROWING CUSTOM ERRORS</h2>
+        <p><strong>What is throw?</strong> Manually create and throw your own errors</p>
+
+        <h3>Step 2.1: Throwing Errors</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function divide(a, b) {
+    if (b === 0) {
+        throw new Error("Cannot divide by zero!");
+    }
+    return a / b;
+}
+
+try {
+    let result = divide(10, 0);
+} catch (error) {
+    console.log("Caught error:", error.message);
+}
+        </pre>
+        <button onclick="demo3()">Run Demo 3</button>
+        <p id="result3"></p>
+
+        <h3>Step 2.2: Custom Error Types</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+class ValidationError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "ValidationError";
+    }
+}
+
+function validateEmail(email) {
+    if (!email.includes("@")) {
+        throw new ValidationError("Invalid email format");
+    }
+    return true;
+}
+        </pre>
+        <button onclick="demo4()">Run Demo 4</button>
+        <p id="result4"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 3: ASYNC ERROR HANDLING -->
+        <h2>3️⃣ ASYNC ERROR HANDLING - Promises and Async/Await</h2>
+        <p><strong>How to handle errors in async code?</strong> Use try/catch with async/await or .catch() with promises</p>
+
+        <h3>Step 3.1: Async/Await Error Handling</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function fetchUserData(userId) {
+    try {
+        let response = await fetch(`https://api.example.com/users/${userId}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        let userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.log("Failed to fetch user data:", error.message);
+        throw error; // Re-throw to let caller handle it
+    }
+}
+        </pre>
+        <button onclick="demo5()">Run Demo 5</button>
+        <p id="result5"></p>
+
+        <h3>Step 3.2: Promise Error Handling</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function riskyAsyncOperation() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let success = Math.random() > 0.5;
+            if (success) {
+                resolve("Operation successful!");
+            } else {
+                reject(new Error("Operation failed randomly"));
+            }
+        }, 1000);
+    });
+}
+
+// Using .catch()
+riskyAsyncOperation()
+    .then(result => console.log(result))
+    .catch(error => console.log("Promise error:", error.message));
+        </pre>
+        <button onclick="demo6()">Run Demo 6</button>
+        <p id="result6"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 4: PRACTICAL EXAMPLES -->
+        <h2>4️⃣ PRACTICAL ERROR HANDLING EXAMPLES</h2>
+
+        <h3>Step 4.1: Form Validation</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function validateForm(formData) {
+    try {
+        if (!formData.name || formData.name.trim() === "") {
+            throw new Error("Name is required");
+        }
+        if (!formData.email || !formData.email.includes("@")) {
+            throw new Error("Valid email is required");
+        }
+        if (!formData.age || formData.age < 18) {
+            throw new Error("Must be 18 or older");
+        }
+        return { success: true, message: "Form is valid" };
+    } catch (error) {
+        return { success: false, message: error.message };
+    }
+}
+        </pre>
+        <button onclick="demo7()">Run Demo 7</button>
+        <p id="result7"></p>
+
+        <h3>Step 4.2: API Error Handling</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function safeApiCall(url) {
+    try {
+        let response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        if (error.name === 'TypeError') {
+            throw new Error("Network error - check your connection");
+        }
+        throw error; // Re-throw other errors
+    }
+}
+        </pre>
+        <button onclick="demo8()">Run Demo 8</button>
+        <p id="result8"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 5: ERROR HANDLING PATTERNS -->
+        <h2>5️⃣ ERROR HANDLING PATTERNS</h2>
+
+        <h3>Step 5.1: Graceful Degradation</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function loadUserPreferences() {
+    try {
+        let preferences = localStorage.getItem('userPrefs');
+        return JSON.parse(preferences);
+    } catch (error) {
+        console.log("Could not load preferences, using defaults");
+        return { theme: 'light', language: 'en' };
+    }
+}
+        </pre>
+        <button onclick="demo9()">Run Demo 9</button>
+        <p id="result9"></p>
+
+        <h3>Step 5.2: Retry Logic</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function retryOperation(operation, maxRetries = 3) {
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            return await operation();
+        } catch (error) {
+            if (i === maxRetries - 1) throw error;
+            console.log(`Attempt ${i + 1} failed, retrying...`);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+    }
+}
+        </pre>
+        <button onclick="demo10()">Run Demo 10</button>
+        <p id="result10"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 6: DEBUGGING TOOLS -->
+        <h2>6️⃣ DEBUGGING AND LOGGING</h2>
+
+        <h3>Step 6.1: Console Methods</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+console.log("General logging");
+console.warn("Warning message");
+console.error("Error message");
+console.table([{name: "John", age: 30}, {name: "Jane", age: 25}]);
+console.time("operation");
+// ... some code ...
+console.timeEnd("operation");
+        </pre>
+        <button onclick="demo11()">Run Demo 11</button>
+        <p id="result11"></p>
+
+        <h3>Step 6.2: Error Stack Traces</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function functionA() {
+    functionB();
+}
+
+function functionB() {
+    functionC();
+}
+
+function functionC() {
+    throw new Error("Something went wrong!");
+}
+
+try {
+    functionA();
+} catch (error) {
+    console.log("Error:", error.message);
+    console.log("Stack trace:", error.stack);
+}
+        </pre>
+        <button onclick="demo12()">Run Demo 12</button>
+        <p id="result12"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 7: PRACTICAL APPLICATION -->
+        <h2>7️⃣ PRACTICAL ERROR HANDLING APP</h2>
+
+        <div id="errorHandlingApp" style="border: 1px solid #ccc; padding: 20px; margin: 20px 0;">
+            <h3>Error Handling Demo App</h3>
+            <div style="margin-bottom: 10px;">
+                <input type="number" id="numberInput" placeholder="Enter a number" style="padding: 5px; margin-right: 10px;">
+                <button onclick="calculateSquare()">Calculate Square</button>
+            </div>
+            <div id="calculationResult" style="margin: 10px 0; padding: 10px; background-color: #f9f9f9;"></div>
+
+            <div style="margin-top: 20px;">
+                <button onclick="simulateNetworkError()">Simulate Network Error</button>
+                <button onclick="simulateValidationError()">Simulate Validation Error</button>
+            </div>
+            <div id="networkResult" style="margin: 10px 0; padding: 10px; background-color: #f9f9f9;"></div>
+        </div>
+
+        <button onclick="demo13()">Initialize Error Handling App</button>
+        <p id="result13"></p>
+
+        <hr style="margin: 30px 0;">
+        <h2>💡 Key Takeaways</h2>
+        <ul>
+            <li><strong>try/catch:</strong> Wrap risky code and handle errors gracefully</li>
+            <li><strong>throw:</strong> Create and throw custom errors</li>
+            <li><strong>finally:</strong> Code that always runs, regardless of errors</li>
+            <li><strong>Async errors:</strong> Use try/catch with async/await, .catch() with promises</li>
+            <li><strong>Error types:</strong> ReferenceError, TypeError, custom errors</li>
+            <li><strong>Graceful degradation:</strong> Provide fallbacks when errors occur</li>
+            <li><strong>Retry logic:</strong> Automatically retry failed operations</li>
+        </ul>
+
+    </div>
+
+    <script>
+        // Demo 1: Basic Try/Catch
+        function demo1() {
+            document.getElementById("result1").innerHTML = "Running try/catch demo...";
+
+            try {
+                let result = riskyOperation();
+                document.getElementById("result1").innerHTML = "Success: " + result;
+            } catch (error) {
+                document.getElementById("result1").innerHTML = "Error caught: " + error.message;
+            } finally {
+                console.log("Finally block always executes");
+            }
+
+            function riskyOperation() {
+                if (Math.random() > 0.5) {
+                    return "Operation successful!";
+                } else {
+                    throw new Error("Random failure occurred");
+                }
+            }
+        }
+
+        // Demo 2: Different Types of Errors
+        function demo2() {
+            let results = [];
+
+            // ReferenceError
+            try {
+                console.log(undefinedVariable);
+            } catch (error) {
+                results.push(`ReferenceError: ${error.message}`);
+            }
+
+            // TypeError
+            try {
+                null.toString().invalidMethod();
+            } catch (error) {
+                results.push(`TypeError: ${error.message}`);
+            }
+
+            document.getElementById("result2").innerHTML = results.join("<br>");
+        }
+
+        // Demo 3: Throwing Errors
+        function demo3() {
+            function divide(a, b) {
+                if (b === 0) {
+                    throw new Error("Cannot divide by zero!");
+                }
+                return a / b;
+            }
+
+            try {
+                let result = divide(10, 0);
+                document.getElementById("result3").innerHTML = "Result: " + result;
+            } catch (error) {
+                document.getElementById("result3").innerHTML = "Error: " + error.message;
+            }
+        }
+
+        // Demo 4: Custom Error Types
+        function demo4() {
+            class ValidationError extends Error {
+                constructor(message) {
+                    super(message);
+                    this.name = "ValidationError";
+                }
+            }
+
+            function validateEmail(email) {
+                if (!email.includes("@")) {
+                    throw new ValidationError("Invalid email format");
+                }
+                return true;
+            }
+
+            try {
+                validateEmail("invalid-email");
+                document.getElementById("result4").innerHTML = "Email is valid";
+            } catch (error) {
+                document.getElementById("result4").innerHTML = `${error.name}: ${error.message}`;
+            }
+        }
+
+        // Demo 5: Async/Await Error Handling
+        async function demo5() {
+            document.getElementById("result5").innerHTML = "Testing async error handling...";
+
+            async function mockApiCall(success = true) {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        if (success) {
+                            resolve({user: "Hamad", id: 123});
+                        } else {
+                            reject(new Error("API call failed"));
+                        }
+                    }, 500);
+                });
+            }
+
+            try {
+                let userData = await mockApiCall(false); // Simulate failure
+                document.getElementById("result5").innerHTML = "User data: " + JSON.stringify(userData);
+            } catch (error) {
+                document.getElementById("result5").innerHTML = "Async error caught: " + error.message;
+            }
+        }
+
+        // Demo 6: Promise Error Handling
+        function demo6() {
+            document.getElementById("result6").innerHTML = "Testing promise error handling...";
+
+            function riskyAsyncOperation() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        let success = Math.random() > 0.7; // 30% success rate
+                        if (success) {
+                            resolve("Operation successful!");
+                        } else {
+                            reject(new Error("Operation failed randomly"));
+                        }
+                    }, 1000);
+                });
+            }
+
+            riskyAsyncOperation()
+                .then(result => {
+                    document.getElementById("result6").innerHTML = "Promise success: " + result;
+                })
+                .catch(error => {
+                    document.getElementById("result6").innerHTML = "Promise error: " + error.message;
+                });
+        }
+
+        // Demo 7: Form Validation
+        function demo7() {
+            function validateForm(formData) {
+                try {
+                    if (!formData.name || formData.name.trim() === "") {
+                        throw new Error("Name is required");
+                    }
+                    if (!formData.email || !formData.email.includes("@")) {
+                        throw new Error("Valid email is required");
+                    }
+                    if (!formData.age || formData.age < 18) {
+                        throw new Error("Must be 18 or older");
+                    }
+                    return { success: true, message: "Form is valid" };
+                } catch (error) {
+                    return { success: false, message: error.message };
+                }
+            }
+
+            let testCases = [
+                {name: "", email: "test@example.com", age: 25},
+                {name: "John", email: "invalid-email", age: 25},
+                {name: "Jane", email: "jane@example.com", age: 16},
+                {name: "Valid", email: "valid@example.com", age: 30}
+            ];
+
+            let results = testCases.map((testCase, index) => {
+                let result = validateForm(testCase);
+                return `Test ${index + 1}: ${result.message}`;
+            });
+
+            document.getElementById("result7").innerHTML = results.join("<br>");
+        }
+
+        // Demo 8: API Error Handling
+        async function demo8() {
+            document.getElementById("result8").innerHTML = "Testing API error handling...";
+
+            async function safeApiCall(url) {
+                try {
+                    let response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    let data = await response.json();
+                    return data;
+                } catch (error) {
+                    if (error.name === 'TypeError') {
+                        throw new Error("Network error - check your connection");
+                    }
+                    throw error;
+                }
+            }
+
+            try {
+                let data = await safeApiCall('https://jsonplaceholder.typicode.com/users/1');
+                document.getElementById("result8").innerHTML = "API call successful: " + data.name;
+            } catch (error) {
+                document.getElementById("result8").innerHTML = "API error: " + error.message;
+            }
+        }
+
+        // Demo 9: Graceful Degradation
+        function demo9() {
+            function loadUserPreferences() {
+                try {
+                    // Simulate localStorage error
+                    let preferences = localStorage.getItem('userPrefs');
+                    if (!preferences) throw new Error("No preferences found");
+                    return JSON.parse(preferences);
+                } catch (error) {
+                    console.log("Could not load preferences, using defaults");
+                    return { theme: 'light', language: 'en', notifications: true };
+                }
+            }
+
+            let prefs = loadUserPreferences();
+            document.getElementById("result9").innerHTML =
+                `Loaded preferences:<br>Theme: ${prefs.theme}<br>Language: ${prefs.language}<br>Notifications: ${prefs.notifications}`;
+        }
+
+        // Demo 10: Retry Logic
+        async function demo10() {
+            document.getElementById("result10").innerHTML = "Testing retry logic...";
+
+            async function retryOperation(operation, maxRetries = 3) {
+                for (let i = 0; i < maxRetries; i++) {
+                    try {
+                        return await operation();
+                    } catch (error) {
+                        if (i === maxRetries - 1) throw error;
+                        console.log(`Attempt ${i + 1} failed, retrying...`);
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                    }
+                }
+            }
+
+            let operation = () => new Promise((resolve, reject) => {
+                if (Math.random() > 0.7) {
+                    resolve("Success!");
+                } else {
+                    reject(new Error("Random failure"));
+                }
+            });
+
+            try {
+                let result = await retryOperation(operation, 3);
+                document.getElementById("result10").innerHTML = "Operation succeeded: " + result;
+            } catch (error) {
+                document.getElementById("result10").innerHTML = "All retries failed: " + error.message;
+            }
+        }
+
+        // Demo 11: Console Methods
+        function demo11() {
+            console.log("=== Console Methods Demo ===");
+            console.log("General logging message");
+            console.warn("This is a warning");
+            console.error("This is an error");
+
+            let users = [
+                {name: "John", age: 30, city: "NYC"},
+                {name: "Jane", age: 25, city: "LA"}
+            ];
+            console.table(users);
+
+            console.time("demoOperation");
+            // Simulate some work
+            let sum = 0;
+            for (let i = 0; i < 100000; i++) {
+                sum += i;
+            }
+            console.timeEnd("demoOperation");
+
+            document.getElementById("result11").innerHTML = "Check the browser console (F12) to see different console methods in action!";
+        }
+
+        // Demo 12: Error Stack Traces
+        function demo12() {
+            function functionA() {
+                functionB();
+            }
+
+            function functionB() {
+                functionC();
+            }
+
+            function functionC() {
+                throw new Error("Something went wrong in functionC!");
+            }
+
+            try {
+                functionA();
+            } catch (error) {
+                console.log("Error:", error.message);
+                console.log("Stack trace:", error.stack);
+                document.getElementById("result12").innerHTML =
+                    `Error caught: ${error.message}<br>Check console for full stack trace!`;
+            }
+        }
+
+        // Demo 13: Error Handling App
+        function demo13() {
+            document.getElementById("result13").innerHTML = "Error handling app initialized! Try the different functions above.";
+        }
+
+        function calculateSquare() {
+            let input = document.getElementById("numberInput");
+            let resultDiv = document.getElementById("calculationResult");
+
+            try {
+                let number = parseFloat(input.value);
+                if (isNaN(number)) {
+                    throw new Error("Please enter a valid number");
+                }
+                if (number < 0) {
+                    throw new Error("Cannot calculate square of negative number");
+                }
+                let square = number * number;
+                resultDiv.innerHTML = `✅ Square of ${number} is ${square}`;
+                resultDiv.style.color = "green";
+            } catch (error) {
+                resultDiv.innerHTML = `❌ Error: ${error.message}`;
+                resultDiv.style.color = "red";
+            }
+        }
+
+        async function simulateNetworkError() {
+            let resultDiv = document.getElementById("networkResult");
+            resultDiv.innerHTML = "Attempting network request...";
+
+            try {
+                // Simulate network error
+                await new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        if (Math.random() > 0.5) {
+                            resolve("Data received successfully!");
+                        } else {
+                            reject(new Error("Network connection failed"));
+                        }
+                    }, 1000);
+                });
+                resultDiv.innerHTML = "✅ Network request successful";
+                resultDiv.style.color = "green";
+            } catch (error) {
+                resultDiv.innerHTML = `❌ Network Error: ${error.message}`;
+                resultDiv.style.color = "red";
+            }
+        }
+
+        function simulateValidationError() {
+            let resultDiv = document.getElementById("networkResult");
+
+            function validateUser(userData) {
+                if (!userData.username || userData.username.length < 3) {
+                    throw new ValidationError("Username must be at least 3 characters");
+                }
+                if (!userData.password || userData.password.length < 6) {
+                    throw new ValidationError("Password must be at least 6 characters");
+                }
+                return true;
+            }
+
+            class ValidationError extends Error {
+                constructor(message) {
+                    super(message);
+                    this.name = "ValidationError";
+                }
+            }
+
+            try {
+                validateUser({username: "ab", password: "123"}); // Invalid data
+                resultDiv.innerHTML = "✅ Validation passed";
+                resultDiv.style.color = "green";
+            } catch (error) {
+                resultDiv.innerHTML = `❌ ${error.name}: ${error.message}`;
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>

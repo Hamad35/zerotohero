@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6+ Features</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; line-height: 1.6;">
+
+        <!-- SECTION 1: ARROW FUNCTIONS -->
+        <h1>📚 Learn ES6+ Features Step by Step</h1>
+
+        <h2>1️⃣ ARROW FUNCTIONS - Shorter Function Syntax</h2>
+        <p><strong>What are arrow functions?</strong> A concise way to write functions using => syntax</p>
+
+        <h3>Step 1.1: Basic Arrow Function</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+// Traditional function
+function add(a, b) {
+    return a + b;
+}
+
+// Arrow function
+const add = (a, b) => a + b;
+        </pre>
+        <button onclick="demo1()">Run Demo 1</button>
+        <p id="result1"></p>
+
+        <h3>Step 1.2: Arrow Functions with Multiple Lines</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const calculate = (a, b, operation) => {
+    let result;
+    switch(operation) {
+        case 'add': result = a + b; break;
+        case 'subtract': result = a - b; break;
+        case 'multiply': result = a * b; break;
+        default: result = 0;
+    }
+    return result;
+};
+        </pre>
+        <button onclick="demo2()">Run Demo 2</button>
+        <p id="result2"></p>
+
+        <h3>Step 1.3: Arrow Functions and 'this'</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const person = {
+    name: "Hamad",
+    traditional: function() {
+        setTimeout(function() {
+            console.log("Traditional: " + this.name); // undefined
+        }, 1000);
+    },
+    arrow: function() {
+        setTimeout(() => {
+            console.log("Arrow: " + this.name); // "Hamad"
+        }, 1000);
+    }
+};
+        </pre>
+        <button onclick="demo3()">Run Demo 3</button>
+        <p id="result3"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 2: DESTRUCTURING -->
+        <h2>2️⃣ DESTRUCTURING - Extracting Values from Arrays/Objects</h2>
+        <p><strong>What is destructuring?</strong> A way to unpack values from arrays or properties from objects</p>
+
+        <h3>Step 2.1: Array Destructuring</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const colors = ["red", "green", "blue"];
+const [first, second, third] = colors;
+
+// Equivalent to:
+// const first = colors[0];
+// const second = colors[1];
+// const third = colors[2];
+        </pre>
+        <button onclick="demo4()">Run Demo 4</button>
+        <p id="result4"></p>
+
+        <h3>Step 2.2: Object Destructuring</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const user = {
+    name: "Hamad",
+    age: 25,
+    city: "Karachi"
+};
+
+const {name, age, city} = user;
+// Creates variables: name, age, city
+        </pre>
+        <button onclick="demo5()">Run Demo 5</button>
+        <p id="result5"></p>
+
+        <h3>Step 2.3: Default Values and Renaming</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const person = {name: "Ali"};
+const {name, age = 18, city: location = "Unknown"} = person;
+
+// name = "Ali"
+// age = 18 (default)
+// location = "Unknown" (renamed from city)
+        </pre>
+        <button onclick="demo6()">Run Demo 6</button>
+        <p id="result6"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 3: TEMPLATE LITERALS -->
+        <h2>3️⃣ TEMPLATE LITERALS - Enhanced String Handling</h2>
+        <p><strong>What are template literals?</strong> Strings with embedded expressions using backticks (`)</p>
+
+        <h3>Step 3.1: Basic Template Literals</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const name = "Hamad";
+const age = 25;
+
+// Traditional concatenation
+const message1 = "Hello, my name is " + name + " and I am " + age + " years old.";
+
+// Template literal
+const message2 = `Hello, my name is ${name} and I am ${age} years old.`;
+        </pre>
+        <button onclick="demo7()">Run Demo 7</button>
+        <p id="result7"></p>
+
+        <h3>Step 3.2: Multi-line Strings</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+// Traditional multi-line string
+const html1 = "<div>\n" +
+              "  <h1>Title</h1>\n" +
+              "  <p>Content</p>\n" +
+              "</div>";
+
+// Template literal multi-line
+const html2 = `<div>
+  <h1>Title</h1>
+  <p>Content</p>
+</div>`;
+        </pre>
+        <button onclick="demo8()">Run Demo 8</button>
+        <p id="result8"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 4: SPREAD AND REST OPERATORS -->
+        <h2>4️⃣ SPREAD & REST OPERATORS - ... (Three Dots)</h2>
+        <p><strong>Spread:</strong> Expands arrays/objects<br><strong>Rest:</strong> Collects multiple values</p>
+
+        <h3>Step 4.1: Spread with Arrays</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+
+// Combine arrays
+const combined = [...arr1, ...arr2]; // [1, 2, 3, 4, 5, 6]
+
+// Copy array
+const copy = [...arr1]; // [1, 2, 3]
+        </pre>
+        <button onclick="demo9()">Run Demo 9</button>
+        <p id="result9"></p>
+
+        <h3>Step 4.2: Spread with Objects</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const person = {name: "Hamad", age: 25};
+const address = {city: "Karachi", country: "Pakistan"};
+
+// Combine objects
+const fullInfo = {...person, ...address};
+
+// Copy and modify
+const updatedPerson = {...person, age: 26};
+        </pre>
+        <button onclick="demo10()">Run Demo 10</button>
+        <p id="result10"></p>
+
+        <h3>Step 4.3: Rest Parameters</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+
+// Can accept any number of arguments
+sum(1, 2, 3);        // 6
+sum(1, 2, 3, 4, 5);  // 15
+        </pre>
+        <button onclick="demo11()">Run Demo 11</button>
+        <p id="result11"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 5: MODULES -->
+        <h2>5️⃣ MODULES - Organizing Code</h2>
+        <p><strong>What are modules?</strong> Reusable pieces of code in separate files</p>
+
+        <h3>Step 5.1: Export/Import Basics</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+// math.js (export)
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
+
+// main.js (import)
+import { add, multiply } from './math.js';
+        </pre>
+        <button onclick="demo12()">Run Demo 12</button>
+        <p id="result12"></p>
+
+        <h3>Step 5.2: Default Exports</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+// calculator.js
+export default class Calculator {
+    add(a, b) { return a + b; }
+    subtract(a, b) { return a - b; }
+}
+
+// main.js
+import Calculator from './calculator.js';
+        </pre>
+        <button onclick="demo13()">Run Demo 13</button>
+        <p id="result13"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 6: PROMISES AND ASYNC/AWAIT -->
+        <h2>6️⃣ MODERN ASYNC FEATURES</h2>
+
+        <h3>Step 6.1: Promises</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("Data loaded!");
+    }, 1000);
+});
+
+promise.then(result => console.log(result));
+        </pre>
+        <button onclick="demo14()">Run Demo 14</button>
+        <p id="result14"></p>
+
+        <h3>Step 6.2: Async/Await</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+async function loadData() {
+    try {
+        const result = await fetchData();
+        console.log(result);
+    } catch (error) {
+        console.log(error);
+    }
+}
+        </pre>
+        <button onclick="demo15()">Run Demo 15</button>
+        <p id="result15"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 7: PRACTICAL EXAMPLE -->
+        <h2>7️⃣ PRACTICAL EXAMPLE - Modern JavaScript App</h2>
+
+        <div id="modernApp" style="border: 1px solid #ccc; padding: 20px; margin: 20px 0;">
+            <h3>Modern JS Features Demo</h3>
+            <div id="userList"></div>
+            <button onclick="loadUsers()">Load Users</button>
+            <div id="userDetails" style="margin-top: 20px;"></div>
+        </div>
+
+        <button onclick="demo16()">Initialize Modern App</button>
+        <p id="result16"></p>
+
+        <hr style="margin: 30px 0;">
+        <h2>💡 Key Takeaways</h2>
+        <ul>
+            <li><strong>Arrow Functions:</strong> Concise function syntax with =>, different 'this' behavior</li>
+            <li><strong>Destructuring:</strong> Extract values from arrays/objects into variables</li>
+            <li><strong>Template Literals:</strong> Enhanced strings with ${} interpolation and multi-line support</li>
+            <li><strong>Spread Operator:</strong> ... to expand arrays/objects</li>
+            <li><strong>Rest Parameters:</strong> ... to collect multiple arguments</li>
+            <li><strong>Modules:</strong> import/export for code organization</li>
+            <li><strong>Promises & Async/Await:</strong> Modern async programming</li>
+        </ul>
+
+    </div>
+
+    <script>
+        // Demo 1: Basic Arrow Function
+        function demo1() {
+            const add = (a, b) => a + b;
+            const result = add(5, 3);
+            document.getElementById("result1").innerHTML = `5 + 3 = ${result}`;
+        }
+
+        // Demo 2: Arrow Functions with Multiple Lines
+        function demo2() {
+            const calculate = (a, b, operation) => {
+                let result;
+                switch(operation) {
+                    case 'add': result = a + b; break;
+                    case 'subtract': result = a - b; break;
+                    case 'multiply': result = a * b; break;
+                    default: result = 0;
+                }
+                return result;
+            };
+
+            const sum = calculate(10, 5, 'add');
+            const difference = calculate(10, 5, 'subtract');
+            const product = calculate(10, 5, 'multiply');
+
+            document.getElementById("result2").innerHTML =
+                `10 + 5 = ${sum}<br>10 - 5 = ${difference}<br>10 × 5 = ${product}`;
+        }
+
+        // Demo 3: Arrow Functions and 'this'
+        function demo3() {
+            document.getElementById("result3").innerHTML = "Check console for 'this' behavior differences";
+
+            const person = {
+                name: "Hamad",
+                traditional: function() {
+                    setTimeout(function() {
+                        console.log("Traditional function 'this':", this.name); // undefined
+                    }, 1000);
+                },
+                arrow: function() {
+                    setTimeout(() => {
+                        console.log("Arrow function 'this':", this.name); // "Hamad"
+                    }, 1000);
+                }
+            };
+
+            person.traditional();
+            person.arrow();
+        }
+
+        // Demo 4: Array Destructuring
+        function demo4() {
+            const colors = ["red", "green", "blue"];
+            const [first, second, third] = colors;
+
+            document.getElementById("result4").innerHTML =
+                `Colors: ${colors.join(", ")}<br>Destructured: ${first}, ${second}, ${third}`;
+        }
+
+        // Demo 5: Object Destructuring
+        function demo5() {
+            const user = {
+                name: "Hamad",
+                age: 25,
+                city: "Karachi"
+            };
+
+            const {name, age, city} = user;
+
+            document.getElementById("result5").innerHTML =
+                `Name: ${name}<br>Age: ${age}<br>City: ${city}`;
+        }
+
+        // Demo 6: Default Values and Renaming
+        function demo6() {
+            const person = {name: "Ali"};
+            const {name, age = 18, city: location = "Unknown"} = person;
+
+            document.getElementById("result6").innerHTML =
+                `Name: ${name}<br>Age: ${age} (default)<br>Location: ${location} (renamed from city)`;
+        }
+
+        // Demo 7: Basic Template Literals
+        function demo7() {
+            const name = "Hamad";
+            const age = 25;
+
+            const message = `Hello, my name is ${name} and I am ${age} years old.`;
+            const calculation = `2 + 2 = ${2 + 2}`;
+
+            document.getElementById("result7").innerHTML =
+                `Template literal: ${message}<br>With expression: ${calculation}`;
+        }
+
+        // Demo 8: Multi-line Strings
+        function demo8() {
+            const html = `<div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+  <h3>Multi-line Template Literal</h3>
+  <p>This HTML was created using a template literal!</p>
+  <p>No need for concatenation or escaping quotes.</p>
+</div>`;
+
+            document.getElementById("result8").innerHTML = html;
+        }
+
+        // Demo 9: Spread with Arrays
+        function demo9() {
+            const arr1 = [1, 2, 3];
+            const arr2 = [4, 5, 6];
+
+            const combined = [...arr1, ...arr2];
+            const copy = [...arr1];
+            const withExtras = [...arr1, 4, 5, ...arr2];
+
+            document.getElementById("result9").innerHTML =
+                `Array 1: ${arr1.join(", ")}<br>Array 2: ${arr2.join(", ")}<br>Combined: ${combined.join(", ")}<br>Copy: ${copy.join(", ")}<br>With extras: ${withExtras.join(", ")}`;
+        }
+
+        // Demo 10: Spread with Objects
+        function demo10() {
+            const person = {name: "Hamad", age: 25};
+            const address = {city: "Karachi", country: "Pakistan"};
+
+            const fullInfo = {...person, ...address};
+            const updatedPerson = {...person, age: 26};
+
+            document.getElementById("result10").innerHTML =
+                `Person: ${JSON.stringify(person)}<br>Address: ${JSON.stringify(address)}<br>Combined: ${JSON.stringify(fullInfo)}<br>Updated: ${JSON.stringify(updatedPerson)}`;
+        }
+
+        // Demo 11: Rest Parameters
+        function demo11() {
+            function sum(...numbers) {
+                return numbers.reduce((total, num) => total + num, 0);
+            }
+
+            const result1 = sum(1, 2, 3);
+            const result2 = sum(1, 2, 3, 4, 5);
+            const result3 = sum(10, 20, 30, 40);
+
+            document.getElementById("result11").innerHTML =
+                `sum(1, 2, 3) = ${result1}<br>sum(1, 2, 3, 4, 5) = ${result2}<br>sum(10, 20, 30, 40) = ${result3}`;
+        }
+
+        // Demo 12: Export/Import Basics (simulated)
+        function demo12() {
+            // Simulating module behavior
+            const mathModule = {
+                add: (a, b) => a + b,
+                multiply: (a, b) => a * b,
+                divide: (a, b) => a / b
+            };
+
+            const {add, multiply} = mathModule;
+            const sum = add(10, 5);
+            const product = multiply(10, 5);
+
+            document.getElementById("result12").innerHTML =
+                `Imported add and multiply functions<br>10 + 5 = ${sum}<br>10 × 5 = ${product}`;
+        }
+
+        // Demo 13: Default Exports (simulated)
+        function demo13() {
+            class Calculator {
+                add(a, b) { return a + b; }
+                subtract(a, b) { return a - b; }
+                multiply(a, b) { return a * b; }
+                divide(a, b) { return a / b; }
+            }
+
+            const calc = new Calculator();
+            const sum = calc.add(15, 7);
+            const difference = calc.subtract(15, 7);
+
+            document.getElementById("result13").innerHTML =
+                `Calculator class imported<br>15 + 7 = ${sum}<br>15 - 7 = ${difference}`;
+        }
+
+        // Demo 14: Promises
+        function demo14() {
+            document.getElementById("result14").innerHTML = "Creating promise...";
+
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Data loaded successfully!");
+                }, 1000);
+            });
+
+            promise.then(result => {
+                document.getElementById("result14").innerHTML = "Promise resolved: " + result;
+            });
+        }
+
+        // Demo 15: Async/Await
+        async function demo15() {
+            document.getElementById("result15").innerHTML = "Loading data with async/await...";
+
+            async function fetchData() {
+                return new Promise(resolve => {
+                    setTimeout(() => resolve("Async data loaded!"), 800);
+                });
+            }
+
+            try {
+                const result = await fetchData();
+                document.getElementById("result15").innerHTML = "Success: " + result;
+            } catch (error) {
+                document.getElementById("result15").innerHTML = "Error: " + error;
+            }
+        }
+
+        // Demo 16: Modern JavaScript App
+        function demo16() {
+            document.getElementById("result16").innerHTML = "Modern JS app initialized! Click 'Load Users' to see ES6+ features in action.";
+        }
+
+        async function loadUsers() {
+            const userList = document.getElementById("userList");
+            const userDetails = document.getElementById("userDetails");
+
+            userList.innerHTML = "Loading users...";
+
+            try {
+                // Simulate API call with modern features
+                const users = await fetchMockUsers();
+
+                // Use arrow functions, destructuring, template literals
+                userList.innerHTML = users.map(user => `
+                    <div style="border: 1px solid #eee; padding: 10px; margin: 5px; cursor: pointer;" onclick="showUserDetails(${user.id})">
+                        ${user.name} (${user.email})
+                    </div>
+                `).join('');
+
+                userDetails.innerHTML = "<p>Click on a user to see details</p>";
+
+            } catch (error) {
+                userList.innerHTML = "Error loading users: " + error.message;
+            }
+        }
+
+        async function fetchMockUsers() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve([
+                        {id: 1, name: "Hamad Ali", email: "hamad@example.com", role: "Developer"},
+                        {id: 2, name: "Sara Ahmed", email: "sara@example.com", role: "Designer"},
+                        {id: 3, name: "Ali Khan", email: "ali@example.com", role: "Manager"}
+                    ]);
+                }, 1000);
+            });
+        }
+
+        function showUserDetails(userId) {
+            const userDetails = document.getElementById("userDetails");
+
+            // Simulate finding user with modern features
+            fetchMockUsers().then(users => {
+                const user = users.find(u => u.id === userId);
+                if (user) {
+                    // Use destructuring and template literals
+                    const {name, email, role} = user;
+                    userDetails.innerHTML = `
+                        <h4>User Details</h4>
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Role:</strong> ${role}</p>
+                    `;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

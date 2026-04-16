@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects and Classes</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; line-height: 1.6;">
+
+        <!-- SECTION 1: OBJECTS -->
+        <h1>📚 Learn Objects and Classes Step by Step</h1>
+
+        <h2>1️⃣ OBJECTS - Data Containers</h2>
+        <p><strong>What is an object?</strong> A collection of properties and methods that represent real-world things</p>
+
+        <h3>Step 1.1: Creating Objects</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let person = {
+    name: "Hamad",
+    age: 25,
+    city: "Karachi"
+};
+        </pre>
+        <button onclick="demo1()">Run Demo 1</button>
+        <p id="result1"></p>
+
+        <h3>Step 1.2: Accessing Object Properties</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let person = {
+    name: "Hamad",
+    age: 25,
+    city: "Karachi"
+};
+
+let name = person.name;        // Dot notation
+let age = person["age"];       // Bracket notation
+        </pre>
+        <button onclick="demo2()">Run Demo 2</button>
+        <p id="result2"></p>
+
+        <h3>Step 1.3: Adding and Modifying Properties</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let car = {
+    brand: "Toyota",
+    model: "Corolla"
+};
+
+car.year = 2020;              // Add new property
+car.model = "Camry";           // Modify existing property
+        </pre>
+        <button onclick="demo3()">Run Demo 3</button>
+        <p id="result3"></p>
+
+        <h3>Step 1.4: Object Methods</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let calculator = {
+    add: function(a, b) {
+        return a + b;
+    },
+    multiply: function(a, b) {
+        return a * b;
+    }
+};
+        </pre>
+        <button onclick="demo4()">Run Demo 4</button>
+        <p id="result4"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 2: CLASSES -->
+        <h2>2️⃣ CLASSES - Object Blueprints</h2>
+        <p><strong>What is a class?</strong> A template for creating objects with the same structure</p>
+
+        <h3>Step 2.1: Creating a Class</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    greet() {
+        return "Hello, I'm " + this.name;
+    }
+}
+        </pre>
+        <button onclick="demo5()">Run Demo 5</button>
+        <p id="result5"></p>
+
+        <h3>Step 2.2: Creating Objects from Classes</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+class Car {
+    constructor(brand, model, year) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+    }
+
+    getInfo() {
+        return this.year + " " + this.brand + " " + this.model;
+    }
+}
+
+let myCar = new Car("Honda", "Civic", 2022);
+        </pre>
+        <button onclick="demo6()">Run Demo 6</button>
+        <p id="result6"></p>
+
+        <h3>Step 2.3: Class Inheritance</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+
+    speak() {
+        return this.name + " makes a sound";
+    }
+}
+
+class Dog extends Animal {
+    speak() {
+        return this.name + " barks";
+    }
+}
+        </pre>
+        <button onclick="demo7()">Run Demo 7</button>
+        <p id="result7"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 3: PRACTICAL EXAMPLES -->
+        <h2>3️⃣ PRACTICAL EXAMPLES</h2>
+
+        <h3>Step 3.1: Student Management System</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+class Student {
+    constructor(name, grades) {
+        this.name = name;
+        this.grades = grades;
+    }
+
+    getAverage() {
+        let sum = this.grades.reduce((a, b) => a + b, 0);
+        return sum / this.grades.length;
+    }
+
+    getGrade() {
+        let avg = this.getAverage();
+        if (avg >= 90) return "A";
+        if (avg >= 80) return "B";
+        if (avg >= 70) return "C";
+        return "F";
+    }
+}
+        </pre>
+        <button onclick="demo8()">Run Demo 8</button>
+        <p id="result8"></p>
+
+        <h3>Step 3.2: Bank Account System</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+class BankAccount {
+    constructor(owner, balance = 0) {
+        this.owner = owner;
+        this.balance = balance;
+    }
+
+    deposit(amount) {
+        this.balance += amount;
+        return "Deposited $" + amount + ". New balance: $" + this.balance;
+    }
+
+    withdraw(amount) {
+        if (amount > this.balance) {
+            return "Insufficient funds";
+        }
+        this.balance -= amount;
+        return "Withdrew $" + amount + ". New balance: $" + this.balance;
+    }
+}
+        </pre>
+        <button onclick="demo9()">Run Demo 9</button>
+        <p id="result9"></p>
+
+        <hr style="margin: 30px 0;">
+        <h2>💡 Key Takeaways</h2>
+        <ul>
+            <li><strong>Objects:</strong> Store data as key-value pairs</li>
+            <li><strong>Properties:</strong> Values stored in objects</li>
+            <li><strong>Methods:</strong> Functions stored in objects</li>
+            <li><strong>Classes:</strong> Blueprints for creating objects</li>
+            <li><strong>Constructor:</strong> Special method that creates objects</li>
+            <li><strong>Inheritance:</strong> Classes can extend other classes</li>
+        </ul>
+
+    </div>
+
+    <script>
+        // Demo 1: Creating Objects
+        function demo1() {
+            let person = {
+                name: "Hamad",
+                age: 25,
+                city: "Karachi"
+            };
+            document.getElementById("result1").innerHTML =
+                `Person: ${person.name}, Age: ${person.age}, City: ${person.city}`;
+        }
+
+        // Demo 2: Accessing Properties
+        function demo2() {
+            let person = {
+                name: "Hamad",
+                age: 25,
+                city: "Karachi"
+            };
+            let name = person.name;
+            let age = person["age"];
+            document.getElementById("result2").innerHTML =
+                `Dot notation: ${name}<br>Bracket notation: ${age}`;
+        }
+
+        // Demo 3: Adding/Modifying Properties
+        function demo3() {
+            let car = {
+                brand: "Toyota",
+                model: "Corolla"
+            };
+            car.year = 2020;
+            car.model = "Camry";
+            document.getElementById("result3").innerHTML =
+                `Car: ${car.year} ${car.brand} ${car.model}`;
+        }
+
+        // Demo 4: Object Methods
+        function demo4() {
+            let calculator = {
+                add: function(a, b) {
+                    return a + b;
+                },
+                multiply: function(a, b) {
+                    return a * b;
+                }
+            };
+            let sum = calculator.add(5, 3);
+            let product = calculator.multiply(5, 3);
+            document.getElementById("result4").innerHTML =
+                `5 + 3 = ${sum}<br>5 × 3 = ${product}`;
+        }
+
+        // Demo 5: Creating a Class
+        function demo5() {
+            class Person {
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+
+                greet() {
+                    return "Hello, I'm " + this.name;
+                }
+            }
+
+            let person1 = new Person("Hamad", 25);
+            let greeting = person1.greet();
+            document.getElementById("result5").innerHTML = greeting;
+        }
+
+        // Demo 6: Creating Objects from Classes
+        function demo6() {
+            class Car {
+                constructor(brand, model, year) {
+                    this.brand = brand;
+                    this.model = model;
+                    this.year = year;
+                }
+
+                getInfo() {
+                    return this.year + " " + this.brand + " " + this.model;
+                }
+            }
+
+            let myCar = new Car("Honda", "Civic", 2022);
+            let info = myCar.getInfo();
+            document.getElementById("result6").innerHTML = `Car Info: ${info}`;
+        }
+
+        // Demo 7: Class Inheritance
+        function demo7() {
+            class Animal {
+                constructor(name) {
+                    this.name = name;
+                }
+
+                speak() {
+                    return this.name + " makes a sound";
+                }
+            }
+
+            class Dog extends Animal {
+                speak() {
+                    return this.name + " barks";
+                }
+            }
+
+            let animal = new Animal("Generic Animal");
+            let dog = new Dog("Buddy");
+
+            document.getElementById("result7").innerHTML =
+                `Animal: ${animal.speak()}<br>Dog: ${dog.speak()}`;
+        }
+
+        // Demo 8: Student Management
+        function demo8() {
+            class Student {
+                constructor(name, grades) {
+                    this.name = name;
+                    this.grades = grades;
+                }
+
+                getAverage() {
+                    let sum = this.grades.reduce((a, b) => a + b, 0);
+                    return sum / this.grades.length;
+                }
+
+                getGrade() {
+                    let avg = this.getAverage();
+                    if (avg >= 90) return "A";
+                    if (avg >= 80) return "B";
+                    if (avg >= 70) return "C";
+                    return "F";
+                }
+            }
+
+            let student = new Student("Ali", [85, 92, 78, 95]);
+            let average = student.getAverage().toFixed(1);
+            let grade = student.getGrade();
+
+            document.getElementById("result8").innerHTML =
+                `Student: ${student.name}<br>Average: ${average}<br>Grade: ${grade}`;
+        }
+
+        // Demo 9: Bank Account
+        function demo9() {
+            class BankAccount {
+                constructor(owner, balance = 0) {
+                    this.owner = owner;
+                    this.balance = balance;
+                }
+
+                deposit(amount) {
+                    this.balance += amount;
+                    return "Deposited $" + amount + ". New balance: $" + this.balance;
+                }
+
+                withdraw(amount) {
+                    if (amount > this.balance) {
+                        return "Insufficient funds";
+                    }
+                    this.balance -= amount;
+                    return "Withdrew $" + amount + ". New balance: $" + this.balance;
+                }
+            }
+
+            let account = new BankAccount("Hamad", 1000);
+            let depositMsg = account.deposit(500);
+            let withdrawMsg = account.withdraw(200);
+
+            document.getElementById("result9").innerHTML =
+                `Account Owner: ${account.owner}<br>${depositMsg}<br>${withdrawMsg}`;
+        }
+    </script>
+</body>
+</html>
