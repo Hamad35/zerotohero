@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops And Maping</title>
+</head>
+
+<body style="background-color: burlywood;">
+    <div style="font-family: Arial, sans-serif; max-width: 900px; margin: 20px auto; line-height: 1.6;">
+
+        <!-- SECTION 1: FOR LOOPS -->
+        <h1>📚 Learn Loops and Mapping Step by Step</h1>
+
+        <h2>1️⃣ FOR LOOPS - Repeat Code Multiple Times</h2>
+        <p><strong>What is a for loop?</strong> A way to repeat code a specific number of times</p>
+
+        <h3>Step 1.1: Basic For Loop</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+for (let i = 0; i < 5; i++) {
+    console.log("Count: " + i);
+}
+        </pre>
+        <button onclick="demo1()">Run Demo 1</button>
+        <p id="result1"></p>
+
+        <h3>Step 1.2: For Loop with Arrays</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let fruits = ["apple", "banana", "cherry"];
+for (let i = 0; i < fruits.length; i++) {
+    console.log("Fruit " + (i + 1) + ": " + fruits[i]);
+}
+        </pre>
+        <button onclick="demo2()">Run Demo 2</button>
+        <p id="result2"></p>
+
+        <h3>Step 1.3: For Loop with Calculations</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let sum = 0;
+for (let i = 1; i <= 10; i++) {
+    sum = sum + i;
+}
+console.log("Sum of 1-10: " + sum);
+        </pre>
+        <button onclick="demo3()">Run Demo 3</button>
+        <p id="result3"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 2: WHILE LOOPS -->
+        <h2>2️⃣ WHILE LOOPS - Repeat Until Condition is False</h2>
+        <p><strong>What is a while loop?</strong> Keeps running as long as a condition is true</p>
+
+        <h3>Step 2.1: Basic While Loop</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let count = 0;
+while (count < 5) {
+    console.log("Count: " + count);
+    count = count + 1;
+}
+        </pre>
+        <button onclick="demo4()">Run Demo 4</button>
+        <p id="result4"></p>
+
+        <h3>Step 2.2: While Loop with User Input Simulation</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let number = 1;
+while (number <= 10) {
+    console.log(number + " x 2 = " + (number * 2));
+    number++;
+}
+        </pre>
+        <button onclick="demo5()">Run Demo 5</button>
+        <p id="result5"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 3: FOR...OF LOOPS -->
+        <h2>3️⃣ FOR...OF LOOPS - Loop Through Arrays Easily</h2>
+        <p><strong>What is for...of?</strong> A simpler way to loop through array elements</p>
+
+        <h3>Step 3.1: For...of with Arrays</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let colors = ["red", "green", "blue"];
+for (let color of colors) {
+    console.log("Color: " + color);
+}
+        </pre>
+        <button onclick="demo6()">Run Demo 6</button>
+        <p id="result6"></p>
+
+        <h3>Step 3.2: For...of with Strings</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let word = "HELLO";
+for (let letter of word) {
+    console.log("Letter: " + letter);
+}
+        </pre>
+        <button onclick="demo7()">Run Demo 7</button>
+        <p id="result7"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 4: ARRAY METHODS -->
+        <h2>4️⃣ ARRAY MAPPING METHODS - Transform Arrays</h2>
+        <p><strong>What are array methods?</strong> Built-in functions that work with arrays</p>
+
+        <h3>Step 4.1: forEach - Do Something with Each Item</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let numbers = [1, 2, 3, 4, 5];
+numbers.forEach(function(num) {
+    console.log(num * 2);
+});
+        </pre>
+        <button onclick="demo8()">Run Demo 8</button>
+        <p id="result8"></p>
+
+        <h3>Step 4.2: map - Transform Each Item</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let prices = [10, 20, 30];
+let discountedPrices = prices.map(function(price) {
+    return price * 0.8; // 20% discount
+});
+        </pre>
+        <button onclick="demo9()">Run Demo 9</button>
+        <p id="result9"></p>
+
+        <h3>Step 4.3: filter - Keep Only Certain Items</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let scores = [85, 92, 78, 95, 88];
+let highScores = scores.filter(function(score) {
+    return score >= 90;
+});
+        </pre>
+        <button onclick="demo10()">Run Demo 10</button>
+        <p id="result10"></p>
+
+        <h3>Step 4.4: reduce - Combine All Items</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let numbers = [1, 2, 3, 4, 5];
+let total = numbers.reduce(function(sum, num) {
+    return sum + num;
+}, 0);
+        </pre>
+        <button onclick="demo11()">Run Demo 11</button>
+        <p id="result11"></p>
+
+        <hr style="margin: 30px 0;">
+
+        <!-- SECTION 5: PRACTICAL EXAMPLES -->
+        <h2>5️⃣ PRACTICAL EXAMPLES - Real World Use</h2>
+
+        <h3>Step 5.1: Shopping Cart Total</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let cart = [
+    {name: "Apple", price: 2.50, quantity: 3},
+    {name: "Banana", price: 1.20, quantity: 2},
+    {name: "Orange", price: 3.00, quantity: 1}
+];
+
+let total = cart.reduce(function(sum, item) {
+    return sum + (item.price * item.quantity);
+}, 0);
+        </pre>
+        <button onclick="demo12()">Run Demo 12</button>
+        <p id="result12"></p>
+
+        <h3>Step 5.2: Student Grade Calculator</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let students = [
+    {name: "Ali", grade: 85},
+    {name: "Sara", grade: 92},
+    {name: "Ahmed", grade: 78}
+];
+
+let passedStudents = students.filter(function(student) {
+    return student.grade >= 80;
+});
+
+let averageGrade = students.reduce(function(sum, student) {
+    return sum + student.grade;
+}, 0) / students.length;
+        </pre>
+        <button onclick="demo13()">Run Demo 13</button>
+        <p id="result13"></p>
+
+        <h3>Step 5.3: Temperature Converter</h3>
+        <pre style="background: #f4f4f4; padding: 10px; border-radius: 5px;">
+let celsiusTemps = [0, 10, 20, 30, 40];
+let fahrenheitTemps = celsiusTemps.map(function(celsius) {
+    return (celsius * 9/5) + 32;
+});
+        </pre>
+        <button onclick="demo14()">Run Demo 14</button>
+        <p id="result14"></p>
+
+        <hr style="margin: 30px 0;">
+        <h2>💡 Key Takeaways</h2>
+        <ul>
+            <li><strong>For loops:</strong> Use when you know how many times to repeat</li>
+            <li><strong>While loops:</strong> Use when you don't know how many times (condition-based)</li>
+            <li><strong>For...of:</strong> Simple way to loop through arrays and strings</li>
+            <li><strong>forEach:</strong> Do something with each item (no return value)</li>
+            <li><strong>map:</strong> Transform each item into something new</li>
+            <li><strong>filter:</strong> Keep only items that match a condition</li>
+            <li><strong>reduce:</strong> Combine all items into a single value</li>
+        </ul>
+
+    </div>
+
+    <script>
+        // Demo 1: Basic For Loop
+        function demo1() {
+            let output = [];
+            for (let i = 0; i < 5; i++) {
+                output.push("Count: " + i);
+            }
+            document.getElementById("result1").innerHTML = output.join("<br>");
+        }
+
+        // Demo 2: For Loop with Arrays
+        function demo2() {
+            let fruits = ["apple", "banana", "cherry"];
+            let output = [];
+            for (let i = 0; i < fruits.length; i++) {
+                output.push("Fruit " + (i + 1) + ": " + fruits[i]);
+            }
+            document.getElementById("result2").innerHTML = output.join("<br>");
+        }
+
+        // Demo 3: For Loop with Calculations
+        function demo3() {
+            let sum = 0;
+            for (let i = 1; i <= 10; i++) {
+                sum = sum + i;
+            }
+            document.getElementById("result3").innerHTML = "Sum of 1-10: " + sum;
+        }
+
+        // Demo 4: Basic While Loop
+        function demo4() {
+            let count = 0;
+            let output = [];
+            while (count < 5) {
+                output.push("Count: " + count);
+                count = count + 1;
+            }
+            document.getElementById("result4").innerHTML = output.join("<br>");
+        }
+
+        // Demo 5: While Loop with Multiplication
+        function demo5() {
+            let number = 1;
+            let output = [];
+            while (number <= 10) {
+                output.push(number + " x 2 = " + (number * 2));
+                number++;
+            }
+            document.getElementById("result5").innerHTML = output.join("<br>");
+        }
+
+        // Demo 6: For...of with Arrays
+        function demo6() {
+            let colors = ["red", "green", "blue"];
+            let output = [];
+            for (let color of colors) {
+                output.push("Color: " + color);
+            }
+            document.getElementById("result6").innerHTML = output.join("<br>");
+        }
+
+        // Demo 7: For...of with Strings
+        function demo7() {
+            let word = "HELLO";
+            let output = [];
+            for (let letter of word) {
+                output.push("Letter: " + letter);
+            }
+            document.getElementById("result7").innerHTML = output.join("<br>");
+        }
+
+        // Demo 8: forEach
+        function demo8() {
+            let numbers = [1, 2, 3, 4, 5];
+            let output = [];
+            numbers.forEach(function (num) {
+                output.push(num + " x 2 = " + (num * 2));
+            });
+            document.getElementById("result8").innerHTML = output.join("<br>");
+        }
+
+        // Demo 9: map
+        function demo9() {
+            let prices = [10, 20, 30];
+            let discountedPrices = prices.map(function (price) {
+                return price * 0.8;
+            });
+            document.getElementById("result9").innerHTML =
+                "Original: $" + prices.join(", $") + "<br>" +
+                "Discounted: $" + discountedPrices.join(", $");
+        }
+
+        // Demo 10: filter
+        function demo10() {
+            let scores = [85, 92, 78, 95, 88];
+            let highScores = scores.filter(function (score) {
+                return score >= 90;
+            });
+            document.getElementById("result10").innerHTML =
+                "All scores: " + scores.join(", ") + "<br>" +
+                "High scores (≥90): " + highScores.join(", ");
+        }
+
+        // Demo 11: reduce
+        function demo11() {
+            let numbers = [1, 2, 3, 4, 5];
+            let total = numbers.reduce(function (sum, num) {
+                return sum + num;
+            }, 0);
+            document.getElementById("result11").innerHTML =
+                "Numbers: " + numbers.join(" + ") + " = " + total;
+        }
+
+        // Demo 12: Shopping Cart
+        function demo12() {
+            let cart = [
+                { name: "Apple", price: 2.50, quantity: 3 },
+                { name: "Banana", price: 1.20, quantity: 2 },
+                { name: "Orange", price: 3.00, quantity: 1 }
+            ];
+            let total = cart.reduce(function (sum, item) {
+                return sum + (item.price * item.quantity);
+            }, 0);
+            document.getElementById("result12").innerHTML =
+                "Cart Items:<br>" +
+                cart.map(item => `${item.name}: $${item.price} x ${item.quantity} = $${(item.price * item.quantity).toFixed(2)}`).join("<br>") +
+                "<br><strong>Total: $" + total.toFixed(2) + "</strong>";
+        }
+
+        // Demo 13: Student Grades
+        function demo13() {
+            let students = [
+                { name: "Ali", grade: 85 },
+                { name: "Sara", grade: 92 },
+                { name: "Ahmed", grade: 78 }
+            ];
+            let passedStudents = students.filter(function (student) {
+                return student.grade >= 80;
+            });
+            let averageGrade = students.reduce(function (sum, student) {
+                return sum + student.grade;
+            }, 0) / students.length;
+            document.getElementById("result13").innerHTML =
+                "All students: " + students.map(s => s.name + " (" + s.grade + ")").join(", ") + "<br>" +
+                "Passed students: " + passedStudents.map(s => s.name + " (" + s.grade + ")").join(", ") + "<br>" +
+                "Average grade: " + averageGrade.toFixed(1);
+        }
+
+        // Demo 14: Temperature Converter
+        function demo14() {
+            let celsiusTemps = [0, 10, 20, 30, 40];
+            let fahrenheitTemps = celsiusTemps.map(function (celsius) {
+                return (celsius * 9 / 5) + 32;
+            });
+            document.getElementById("result14").innerHTML =
+                "Celsius: " + celsiusTemps.join("°, ") + "°<br>" +
+                "Fahrenheit: " + fahrenheitTemps.map(f => f.toFixed(1)).join("°, ") + "°";
+        }
+    </script>
+</body>
+
+</html>
